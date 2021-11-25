@@ -18,6 +18,10 @@
 		E5A3E0ED27503862004C0125 /* PokemonDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A3E0EC27503862004C0125 /* PokemonDetailViewController.swift */; };
 		E5A3E0EF2750386B004C0125 /* PokemonDetailViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A3E0EE2750386B004C0125 /* PokemonDetailViewControllerDelegate.swift */; };
 		E5A3E0F1275038AF004C0125 /* PokemonDetailParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A3E0F0275038AF004C0125 /* PokemonDetailParam.swift */; };
+		E5A3E0F427503D21004C0125 /* ProgressLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A3E0F327503D21004C0125 /* ProgressLoader.swift */; };
+		E5A3E0F727503D8D004C0125 /* SystemAlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A3E0F627503D8D004C0125 /* SystemAlertMessage.swift */; };
+		E5A3E0F927503DC7004C0125 /* AlertResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A3E0F827503DC7004C0125 /* AlertResponse.swift */; };
+		E5A3E0FB27503E04004C0125 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A3E0FA27503E04004C0125 /* UIViewController.swift */; };
 		E5E093B8274EA34500694309 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E09396274EA34400694309 /* Environment.swift */; };
 		E5E093B9274EA34500694309 /* MainEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E09398274EA34400694309 /* MainEnvironment.swift */; };
 		E5E093BB274EA34500694309 /* URLSessionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E0939C274EA34400694309 /* URLSessionOperation.swift */; };
@@ -106,6 +110,10 @@
 		E5A3E0EC27503862004C0125 /* PokemonDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailViewController.swift; sourceTree = "<group>"; };
 		E5A3E0EE2750386B004C0125 /* PokemonDetailViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailViewControllerDelegate.swift; sourceTree = "<group>"; };
 		E5A3E0F0275038AF004C0125 /* PokemonDetailParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailParam.swift; sourceTree = "<group>"; };
+		E5A3E0F327503D21004C0125 /* ProgressLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressLoader.swift; sourceTree = "<group>"; };
+		E5A3E0F627503D8D004C0125 /* SystemAlertMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemAlertMessage.swift; sourceTree = "<group>"; };
+		E5A3E0F827503DC7004C0125 /* AlertResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertResponse.swift; sourceTree = "<group>"; };
+		E5A3E0FA27503E04004C0125 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		E5E09396274EA34400694309 /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		E5E09398274EA34400694309 /* MainEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainEnvironment.swift; sourceTree = "<group>"; };
 		E5E0939C274EA34400694309 /* URLSessionOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionOperation.swift; sourceTree = "<group>"; };
@@ -255,6 +263,23 @@
 				E5A3E0F0275038AF004C0125 /* PokemonDetailParam.swift */,
 			);
 			path = PokemonDetail;
+			sourceTree = "<group>";
+		};
+		E5A3E0F227503D0B004C0125 /* Loader */ = {
+			isa = PBXGroup;
+			children = (
+				E5A3E0F327503D21004C0125 /* ProgressLoader.swift */,
+			);
+			path = Loader;
+			sourceTree = "<group>";
+		};
+		E5A3E0F527503D80004C0125 /* Alerts */ = {
+			isa = PBXGroup;
+			children = (
+				E5A3E0F627503D8D004C0125 /* SystemAlertMessage.swift */,
+				E5A3E0F827503DC7004C0125 /* AlertResponse.swift */,
+			);
+			path = Alerts;
 			sourceTree = "<group>";
 		};
 		E5E09395274EA34400694309 /* Core */ = {
@@ -414,6 +439,8 @@
 		E5E0942B274EA49E00694309 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				E5A3E0F527503D80004C0125 /* Alerts */,
+				E5A3E0F227503D0B004C0125 /* Loader */,
 				E5E0942C274EA49E00694309 /* Messenger.swift */,
 				E5E0942D274EA49E00694309 /* StandardMessenger.swift */,
 			);
@@ -441,6 +468,7 @@
 				E5E094AD274EA4AE00694309 /* UIButton.swift */,
 				E5E094B0274EA4AE00694309 /* DateFormatter.swift */,
 				E5E094B2274EA4AE00694309 /* Optional.swift */,
+				E5A3E0FA27503E04004C0125 /* UIViewController.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -640,6 +668,7 @@
 				E5E7DA1A274FD6A300606A7F /* BaseViewController.swift in Sources */,
 				E5E7DA28274FE04600606A7F /* ViewController.swift in Sources */,
 				E5E7DA1D274FD80600606A7F /* PokemonListCoordinator.swift in Sources */,
+				E5A3E0F727503D8D004C0125 /* SystemAlertMessage.swift in Sources */,
 				E5E093C9274EA34500694309 /* Core.swift in Sources */,
 				E5E093B8274EA34500694309 /* Environment.swift in Sources */,
 				E5E09434274EA49E00694309 /* ColorLayout.swift in Sources */,
@@ -672,12 +701,15 @@
 				E5E094C4274EA4AE00694309 /* DateFormatter.swift in Sources */,
 				E5E093BF274EA34500694309 /* NetworkRequest.swift in Sources */,
 				E5E093C5274EA34500694309 /* BaseOperations.swift in Sources */,
+				E5A3E0F927503DC7004C0125 /* AlertResponse.swift in Sources */,
 				E5E094BD274EA4AE00694309 /* RawRepresentable.swift in Sources */,
 				E5E7DA21274FD81C00606A7F /* PokemonListViewControllerDelegate.swift in Sources */,
 				E5E0943E274EA49E00694309 /* Navigator.swift in Sources */,
 				E5E093B9274EA34500694309 /* MainEnvironment.swift in Sources */,
+				E5A3E0F427503D21004C0125 /* ProgressLoader.swift in Sources */,
 				E5E093BB274EA34500694309 /* URLSessionOperation.swift in Sources */,
 				E5E093CD274EA34500694309 /* BaseService.swift in Sources */,
+				E5A3E0FB27503E04004C0125 /* UIViewController.swift in Sources */,
 				E5E09433274EA49E00694309 /* TextFieldLayout.swift in Sources */,
 				E5E093C3274EA34500694309 /* OperationPromise.swift in Sources */,
 				E5A3E0EB27503851004C0125 /* PokemonDetailCoordinator.swift in Sources */,

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-protocol Coordinable: class {
+protocol Coordinable: AnyObject {
     associatedtype Coordinator
     init(coordinator: Coordinator)
 }

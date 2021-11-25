@@ -8,5 +8,9 @@
 import Foundation
 
 final class StandardMessenger: Messenger {
+    
+    lazy var loader: Loader = ProgressLoader()
+    lazy var alert: AlertMessage = SystemAlertMessage()
+    
     init() {}
 }

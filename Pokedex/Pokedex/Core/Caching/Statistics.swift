@@ -9,9 +9,9 @@ import Foundation
 
 struct Statistics {
     
-    internal(set) var hits = 0
-    internal(set) var misses = 0
-    internal(set) var numberOfKeys = 0
+    var hits = 0
+    var misses = 0
+    var numberOfKeys = 0
     
     mutating func reset() {
         hits = 0

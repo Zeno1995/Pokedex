@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol Chainable: class {
+protocol Chainable: AnyObject {
     associatedtype In
     associatedtype Out
     associatedtype Err: OperationError

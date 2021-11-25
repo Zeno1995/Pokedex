@@ -8,4 +8,17 @@
 import Foundation
 
 protocol Messenger {
+    var alert: AlertMessage { get }
+    var loader: Loader { get }
+}
+
+protocol Loader {
+    func showLoading()
+    func stopLoading()
+}
+
+protocol AlertMessage {
+    func showAlert(title: String)
+
+    func showAlert(title: String, description: String)
 }
