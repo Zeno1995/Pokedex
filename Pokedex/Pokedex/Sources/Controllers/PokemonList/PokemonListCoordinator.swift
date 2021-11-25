@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+final class PokemonListCoordinator: VoidCoordinator<PokemonListViewController> {
+    
+}
+
+extension PokemonListCoordinator: PokemonListViewControllerDelegate {
+    
+}

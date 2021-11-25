@@ -27,34 +27,34 @@ class BaseViewController<C>: UIViewController, Coordinable {
        
     }
     
-    override open func loadView() {
-        view = UIView(frame: UIScreen.main.bounds)
-        view.backgroundColor = .white
-    }
+//    override open func loadView() {
+//        view = UIView(frame: UIScreen.main.bounds)
+//        view.backgroundColor = .white
+//    }
     
     override open func viewDidLoad() {
         super.viewDidLoad()
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        if self.navigationController?.isNavigationBarHidden ?? false {
-            if let color = self.safeHareaTopColor {
-                let view = UIView()
-                view.backgroundColor = color
-                self.view.addSubview(view)
-                view.anchor(top: self.view.topAnchor, left: self.view.leadingAnchor, bottom: self.view.safeTopAnchor, right: self.view.trailingAnchor)
-            }
-        }
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        if self.navigationController?.isNavigationBarHidden ?? false {
-            return self.statusBarStyle
-        } else {
-            return .default
-        }
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        
+//        if self.navigationController?.isNavigationBarHidden ?? false {
+//            if let color = self.safeHareaTopColor {
+//                let view = UIView()
+//                view.backgroundColor = color
+//                self.view.addSubview(view)
+//                view.anchor(top: self.view.topAnchor, left: self.view.leadingAnchor, bottom: self.view.safeTopAnchor, right: self.view.trailingAnchor)
+//            }
+//        }
+//    }
+//    
+//    override var preferredStatusBarStyle: UIStatusBarStyle {
+//        if self.navigationController?.isNavigationBarHidden ?? false {
+//            return self.statusBarStyle
+//        } else {
+//            return .default
+//        }
+//    }
 }
