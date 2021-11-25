@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+struct PokemonDetailParam {
+    let pokemonId: Int
+}

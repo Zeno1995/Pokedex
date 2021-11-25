@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+final class PokemonDetailCoordinator: BaseCoordinator<PokemonDetailViewController, PokemonDetailParam> {
+    
+}
+
+extension PokemonDetailCoordinator: PokemonDetailViewControllerDelegate {
+    
+}

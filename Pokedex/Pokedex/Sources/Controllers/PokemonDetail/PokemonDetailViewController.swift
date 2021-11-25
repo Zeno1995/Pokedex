@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+final class PokemonDetailViewController: BaseViewController<PokemonDetailViewControllerDelegate> {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.view.backgroundColor = .yellow
+    }
+}
