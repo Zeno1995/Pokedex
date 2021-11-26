@@ -17,6 +17,6 @@ extension Environment {
         var header = EnvironmentHeaders()
         header["Content-Type"] = "application/json"
         header["Accept"] = "application/json"
-        return Environment(name: "prod", host: "", headers: header) // TODO: - Set production url
+        return Environment(name: "prod", host: "https://pokeapi.co/api/v2", headers: header) 
     }()
 }

@@ -9,159 +9,132 @@ import Foundation
 import Dispatch
 
 class NetworkCache {
-    
-    private var cache = [AnyHashable : CacheObject]()
-    private let defaultTTL: UInt
-    private let checkFrequency: UInt
-    
-    private(set) var statistics: Statistics
 
-    private var timer: DispatchSourceTimer?
-    private let timerQueue: DispatchQueue
+    private let defaultTTL: UInt
     private let queue: DispatchQueue
-    
+
     init(defaultTTL: UInt = 0, checkFrequency: UInt = 60) {
         self.defaultTTL = defaultTTL
-        self.checkFrequency = checkFrequency
-        statistics = Statistics()
-        queue =  DispatchQueue(label: "NetworkCache: queue", attributes: .concurrent)
-        timerQueue =  DispatchQueue(label: "NetworkCache: timerQueue")
-        startDataChecks()
+        queue = DispatchQueue(label: "NetworkCache: queue", attributes: .concurrent)
+        self.clearExpired()
     }
-    
-    deinit {
-        stopDataChecks()
+
+    private func setCacheObject(_ object: Data, forKey key: String, withTTL ttl: UInt) {
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .formatted(DateFormatter.iso8601Full)
+
+        do {
+            let cacheObject = try CacheObject(data: object, ttl: ttl)
+            let cacheData = try encoder.encode(cacheObject)
+            try cacheData.write(to: self.buildFilePath(key: key))
+        } catch {}
     }
-    
-    private func setCacheObject<T: Hashable>(_ object: Any, forKey key: T, withTTL ttl: UInt) {
-        if let cacheObject = cache[AnyHashable(key)] {
-            cacheObject.data = object
-            cacheObject.setTTL(ttl)
-        }
-        else {
-            cache[AnyHashable(key)] = CacheObject(data: object, ttl: ttl)
-            statistics.numberOfKeys += 1
-        }
-    }
-    
-    func setObject<T: Hashable>(_ object: Any, forKey key: T, withTTL: UInt?=nil) {
+
+    func setObject(_ object: Data, forKey key: String, withTTL: UInt?=nil) {
         let ttl = withTTL ?? defaultTTL
-        queue.sync(flags: [.barrier]) { setCacheObject(object, forKey: key, withTTL: ttl) }
-    }
-    
-    private func getCacheObject<T: Hashable>(forKey key: T) -> Any? {
-        if let cacheObject = cache[AnyHashable(key)], !cacheObject.expired() {
-            statistics.hits += 1
-            return cacheObject.data
+        queue.sync(flags: [.barrier]) { [weak self] in
+            guard let self = self else { return }
+            self.setCacheObject(object, forKey: key, withTTL: ttl)
         }
-        else {
-            statistics.misses += 1
+    }
+
+    private func getCacheObject(forKey key: String) -> Data? {
+        do {
+            let object = try self.getObject(url: self.buildFilePath(key: key))
+            return try object.getData()
+        } catch {
             return nil
         }
     }
-    
-    func object<T: Hashable>(forKey key: T) -> Any? {
-        var object : Any?
-        queue.sync() { object = getCacheObject(forKey: key) }
-        return object
-    }
-    
-    func keys() -> [Any] {
-        var keys : [Any]?
-        queue.sync() { keys = cacheKeys() }
-        return keys!
-    }
-    
-    private func cacheKeys() -> [Any] {
-        var keys = [Any]()
-        for key in self.cache.keys {
-            keys.append(key.base)
-        }
-        return keys
-    }
-    
-    func removeObject<T: Hashable>(forKey key: T) {
-        removeObjects(forKeys: [key])
-    }
-    
-    func removeObjects<T: Hashable>(forKeys keys: T...) {
-        removeObjects(forKeys: keys)
-    }
-    
-    func removeObjects<T: Hashable>(forKeys keys: [T]) {
-        queue.sync(flags: [.barrier]) {
-            removeCacheObjects(forKeys: keys)
+
+    @discardableResult
+    private func getObject(url: URL) throws -> CacheObject {
+        do {
+            let savedData = try Data(contentsOf: url)
+            let cacheObject = try JSONDecoder().decode(CacheObject.self, from: savedData)
+            if cacheObject.expired() {
+                try FileManager.default.removeItem(at: url)
+                #if DEBUG
+                print("\n\n\n🔥🔥🔥🔥🔥🔥🔥🔥🔥\n💊 CACHE: \nAUTO REMOVED: \(url.lastPathComponent)\n\n\n")
+                #endif
+                throw CacheError.expired
+            }
+            return cacheObject
+        } catch {
+            throw CacheError.nofFound
         }
     }
 
-    private func removeCacheObjects<T: Hashable>(forKeys keys: [T]) {
+    func object(forKey key: String) -> Data? {
+        var object: Data?
+        queue.sync { [weak self] in
+            guard let self = self else { return }
+            object = self.getCacheObject(forKey: key)
+        }
+        return object
+    }
+
+    func removeObject(forKey key: String) {
+        removeObjects(forKeys: [key])
+    }
+
+    func removeObjects(forKeys keys: [String]) {
+        queue.sync(flags: [.barrier]) { [weak self] in
+            guard let self = self else { return }
+            self.removeCacheObjects(forKeys: keys)
+        }
+    }
+
+    private func removeCacheObjects(forKeys keys: [String]) {
         for key in keys {
-            if let _ = cache.removeValue(forKey: AnyHashable(key)) {
-                statistics.numberOfKeys -= 1
+            do {
+                try FileManager.default.removeItem(at: self.buildFilePath(key: key))
+                #if DEBUG
+                print("\n\n\n🔥🔥🔥🔥🔥🔥🔥🔥🔥\n💊 CACHE: \nREMOVED: \(key)\n\n\n")
+                #endif
+            } catch {
+                continue
             }
         }
     }
-    
-    func removeAllObjects() {
-        queue.sync(flags: [.barrier]) { removeAllCacheObjects() }
+
+    public func removeAllCacheObjects() {
+        do {
+            try FileManager.default.removeItem(at: self.buildFolder())
+        } catch { }
     }
-    
-    private func removeAllCacheObjects() {
-        self.cache.removeAll()
-        self.statistics.numberOfKeys = 0
-    }
-    
-    func setTTL<T: Hashable>(_ ttl: UInt, forKey key: T) -> Bool {
-        var success = false
-        queue.sync(flags: [.barrier]) { success = setCacheObjectTTL(ttl, forKey: key) }
-        return success
-    }
-    
-    private func setCacheObjectTTL<T: Hashable>(_ ttl: UInt, forKey key: T) -> Bool {
-        if let cacheObject = cache[AnyHashable(key)], !cacheObject.expired() {
-            cacheObject.setTTL(ttl)
-            return true
-        }
-        return false
-    }
-    
-    func flush() {
-        queue.sync(flags: [.barrier]) { flushCache() }
-    }
-    
-    private func flushCache() {
-        cache.removeAll()
-        statistics.reset()
-    }
-    
-    
-    private func check() {
-        for (key, cacheObject) in cache {
-            if cacheObject.expired() {
-                if let _ = cache.removeValue(forKey: key) {
-                    statistics.numberOfKeys -= 1
+
+    private func clearExpired() {
+        do {
+            let directoryContents = try FileManager.default.contentsOfDirectory(at: self.buildFolder(),
+                                                                                includingPropertiesForKeys: nil,
+                                                                                options: [])
+            for url in directoryContents {
+                do {
+                    try self.getObject(url: url)
+                } catch {
+                    continue
                 }
             }
-        }
+        } catch {}
     }
-    
-    private func startDataChecks() {
-        timer = DispatchSource.makeTimerSource(queue: timerQueue)
-        timer!.schedule(deadline: DispatchTime.now(), repeating: Double(checkFrequency), leeway: DispatchTimeInterval.milliseconds(1))
-        timer!.setEventHandler() { self.queue.async(flags: [.barrier], execute: self.check) }
-        timer!.resume()
+
+    private func buildFilePath(key: String) throws -> URL {
+        let key = key.replacingOccurrences(of: "/", with: "")
+        var documentDirectoryURL = try self.buildFolder()
+        try FileManager.default.createDirectory(at: documentDirectoryURL,
+                                                withIntermediateDirectories: true,
+                                                attributes: nil)
+        documentDirectoryURL.appendPathComponent(key)
+        return documentDirectoryURL
     }
-    
-    private func restartDataChecks() {
-        guard let timer = timer else { return }
-        timer.suspend()
-        timer.schedule(deadline: DispatchTime.now(), repeating: Double(checkFrequency))
-        timer.resume()
-    }
-    
-    private func stopDataChecks() {
-        guard let _ = timer else { return }
-        timer!.cancel()
-        timer = nil
+
+    private func buildFolder() throws -> URL {
+        var documentDirectoryURL = try FileManager.default.url(for: .cachesDirectory,
+                                                               in: .userDomainMask,
+                                                               appropriateFor: nil,
+                                                               create: false)
+        documentDirectoryURL.appendPathComponent("caching")
+        return documentDirectoryURL
     }
 }

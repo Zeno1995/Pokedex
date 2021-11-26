@@ -20,7 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private lazy var context = Context(core: self.core, navigator: navigator, messenger: messenger)
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
         
         let navVC = UINavigationController()
         self.window = UIWindow(frame: UIScreen.main.bounds)
@@ -28,10 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         context.navigator.start(nvc: navVC, coordinator: PokemonListCoordinator(context: context), animated: true)
 
         self.window?.makeKeyAndVisible()
-        
-//        window = UIWindow(frame: UIScreen.main.bounds)
-//        window?.rootViewController = ViewController()
-//        window?.makeKeyAndVisible()
         
         return true
     }

@@ -7,24 +7,28 @@
 
 import Foundation
 
-class CacheObject {
-    var data : Any
-    var expirationDate : Date
-    
-    init(data: Any, ttl: UInt) {
+class CacheObject: Codable {
+    private var data: Data
+    var expirationDate: TimeInterval
+
+    init(data: Data, ttl: UInt) throws {
         self.data = data
         expirationDate = CacheObject.expirationDate(fromTTL: ttl)
     }
-    
+
     func expired() -> Bool {
-        return expirationDate.timeIntervalSinceNow < 0
+        expirationDate - Date().timeIntervalSince1970 < 0
     }
-    
+
     func setTTL(_ ttl: UInt) {
         expirationDate = CacheObject.expirationDate(fromTTL: ttl)
     }
-    
-    class func expirationDate(fromTTL ttl: UInt) -> Date {
-        return ttl == 0 ? Date.distantFuture : Date() + TimeInterval(ttl)
+
+    func getData() throws -> Data {
+        return data
+    }
+
+    class func expirationDate(fromTTL ttl: UInt) -> TimeInterval {
+        ttl == 0 ? Date.distantFuture.timeIntervalSince1970 : (Date() + TimeInterval(ttl)).timeIntervalSince1970
     }
 }

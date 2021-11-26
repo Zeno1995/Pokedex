@@ -14,6 +14,7 @@ open class Core {
     
     //Services    
     lazy var sessionService: SessionService = SessionServiceCore(container: container)
+    lazy var pokeServices: PokeService = PokeServiceCore(container: container)
     
     init(container: Container, environment: Environment) {
         self.container = container
