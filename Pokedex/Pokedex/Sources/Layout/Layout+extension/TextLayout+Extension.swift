@@ -39,4 +39,52 @@ extension TextLayout {
         
         return TextLayout(attributes: attributes)
     }()
+    
+    static var description: TextLayout = {
+        let style = NSMutableParagraphStyle()
+        style.alignment = .left
+        style.lineBreakMode = .byTruncatingTail
+        
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: FontLayout.font(size: 14, weight: .regular),
+            .foregroundColor: ColorLayout.black,
+            .backgroundColor: ColorLayout.clear,
+            .paragraphStyle: style,
+            .kern: 0
+        ]
+        
+        return TextLayout(attributes: attributes)
+    }()
+    
+    static var title: TextLayout = {
+        let style = NSMutableParagraphStyle()
+        style.alignment = .left
+        style.lineBreakMode = .byTruncatingTail
+        
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: FontLayout.font(size: 22, weight: .bold),
+            .foregroundColor: ColorLayout.black,
+            .backgroundColor: ColorLayout.clear,
+            .paragraphStyle: style,
+            .kern: 0
+        ]
+        
+        return TextLayout(attributes: attributes)
+    }()
+    
+    static var subtitle: TextLayout = {
+        let style = NSMutableParagraphStyle()
+        style.alignment = .left
+        style.lineBreakMode = .byTruncatingTail
+        
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: FontLayout.font(size: 18, weight: .semibold),
+            .foregroundColor: ColorLayout.black,
+            .backgroundColor: ColorLayout.clear,
+            .paragraphStyle: style,
+            .kern: 0
+        ]
+        
+        return TextLayout(attributes: attributes)
+    }()
 }

@@ -11,6 +11,7 @@ final class PokemonListOperation: StandardOperation<PokemonListRequest, PokemonL
 
     private typealias This = PokemonListOperation
     private static let endPoint = "/pokemon"
+    let ttl: UInt = 86_400 // 24 ore
 
     override func perform() throws {
         
@@ -24,7 +25,10 @@ final class PokemonListOperation: StandardOperation<PokemonListRequest, PokemonL
 
         let request = NetworkRequest(method: .get,
                                      path: This.endPoint,
-                                     queryParams: params)
+                                     queryParams: params,
+                                     localCache: cache(),
+                                     localCacheKey: key(),
+                                     ttlRequest: ttl)
 
         begin(with: NetworkOperation.self, input: request, stubFlag: self.useStub, noCache: self.noCache)
             .then(StatusCodeOperation.self)

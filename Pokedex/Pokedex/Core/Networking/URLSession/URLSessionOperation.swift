@@ -37,13 +37,12 @@ final class URLSessionOperation: StandardOperation<URLSessionOperationInput, Net
 
         if let cache = request.localCache, let key = request.localCacheKey, let _ = input.request.ttlRequest, key.isEmpty == false {
             if let item = cache.object(forKey: key) {
-                let body:Data = item as! Data
                 #if DEBUG
-                print("\n\n\n\n\n\n🔥🔥🔥🔥🔥🔥🔥🔥🔥\n💊 CACHE:\n\(String(describing: self.name))\nLOAD key:\(key)  ->  \(body)\n\n\n\n\n\n\n\n\n")
+                print("\n\n\n\n\n\n🔥🔥🔥🔥🔥🔥🔥🔥🔥\n💊 CACHE:\n\(String(describing: self.name))\nLOAD key:\(key)  ->  \(item)\n\n\n\n\n\n\n\n\n")
                 #endif
                 finish(output: NetworkResponse(request: input.request,
                                                httpUrlResponse: HTTPURLResponse(url: urlRequest.url!, statusCode: 200, httpVersion: nil, headerFields: nil)!,
-                                               body: body,
+                                               body: item,
                                                bodyOrigin: .fromCache))
                 return
             }

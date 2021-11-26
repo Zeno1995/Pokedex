@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 final class PokemonListCoordinator: VoidCoordinator<PokemonListViewController> {
     private func loadPokemonList() {
@@ -15,11 +16,14 @@ final class PokemonListCoordinator: VoidCoordinator<PokemonListViewController> {
                                                    stubFlag: false) { [weak self] result in
             guard let self = self else { return }
             self.context.messenger.loader.stopLoading()
-            switch result {
-            case .success(let response):
-                print(response)
-            case .failure(let error):
-                self.context.messenger.alert.showAlert(title: "Errore!", description: error.localizedDescription)
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let response):
+                    guard let results = response.results else { return }
+                    self.view.pokemonList = results.map({ PokemonListImageItem(item: $0) })
+                case .failure(let error):
+                    self.context.messenger.alert.showAlert(title: "Errore!", description: error.localizedDescription)
+                }
             }
         }
     }
@@ -35,5 +39,18 @@ extension PokemonListCoordinator: PokemonListViewControllerDelegate {
         let param = PokemonDetailParam(pokemonId: id)
         let coordinator = PokemonDetailCoordinator(context: self.context, param: param)
         self.context.navigator.navigate(to: coordinator, animated: true)
+    }
+    
+    func fetchImage(from url: URL, completion: @escaping (UIImage?) -> Void) {
+        context.core.pokeServices.downloadImage(input: url.absoluteString) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let image):
+                    completion(image)
+                case .failure:
+                    completion(nil)
+                }
+            }
+        }
     }
 }

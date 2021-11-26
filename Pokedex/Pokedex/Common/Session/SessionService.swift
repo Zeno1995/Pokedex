@@ -9,4 +9,5 @@ import Foundation
 
 protocol SessionService: Service {
     func networkCache() -> NetworkCache
+    func imageCache() -> ImageCache
 }
