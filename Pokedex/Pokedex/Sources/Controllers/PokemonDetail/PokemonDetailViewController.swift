@@ -12,5 +12,6 @@ final class PokemonDetailViewController: BaseViewController<PokemonDetailViewCon
         super.viewDidLoad()
         
         self.view.backgroundColor = .yellow
+        self.coordinator.viewDidLoaded()
     }
 }

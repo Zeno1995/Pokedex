@@ -8,5 +8,5 @@
 import Foundation
 
 protocol PokemonDetailViewControllerDelegate: AnyObject {
-    
+    func viewDidLoaded()
 }

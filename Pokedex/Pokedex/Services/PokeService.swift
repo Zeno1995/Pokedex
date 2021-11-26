@@ -15,5 +15,10 @@ protocol PokeService: Service {
                      completion: @escaping Completion<PokemonListResponse, ServiceError>) -> Operation
     
     @discardableResult
+    func pokemonDetail(from input: PokemonDetailRequest,
+                     stubFlag: Bool?,
+                     completion: @escaping Completion<PokemonDetailResponse, ServiceError>) -> Operation
+    
+    @discardableResult
     func downloadImage(input: String, completion: @escaping Completion<UIImage?, ServiceError>) -> Operation
 }

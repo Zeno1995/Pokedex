@@ -35,10 +35,11 @@ extension PokemonListCoordinator: PokemonListViewControllerDelegate {
         self.loadPokemonList()
     }
     
-    func goToDetail(withId id: Int) {
-        let param = PokemonDetailParam(pokemonId: id)
+    func showPokemonDetail(withId pokemonId: String) {
+        let param = PokemonDetailParam(pokemonId: pokemonId)
         let coordinator = PokemonDetailCoordinator(context: self.context, param: param)
         self.context.navigator.navigate(to: coordinator, animated: true)
+        
     }
     
     func fetchImage(from url: URL, completion: @escaping (UIImage?) -> Void) {
@@ -53,4 +54,5 @@ extension PokemonListCoordinator: PokemonListViewControllerDelegate {
             }
         }
     }
+    
 }
