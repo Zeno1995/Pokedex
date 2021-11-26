@@ -8,5 +8,7 @@
 import Foundation
 
 protocol PokemonListViewControllerDelegate: AnyObject {
+    
+    func viewDidLoaded()
     func goToDetail(withId id: Int)
 }

@@ -33,6 +33,8 @@ final class PokemonListViewController: BaseViewController<PokemonListViewControl
         
         self.view.addSubview(self.button)
         self.button.anchor(top: self.titleLabel.topAnchor, paddingTop: 32, centerX: self.view.centerXAnchor)
+        
+        self.coordinator.viewDidLoaded()
     }
     
     @IBAction func goToDetail(_ sender: UIButton) {
