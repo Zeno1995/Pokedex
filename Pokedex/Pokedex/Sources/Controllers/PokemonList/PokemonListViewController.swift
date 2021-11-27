@@ -41,9 +41,7 @@ final class PokemonListViewController: BaseViewController<PokemonListViewControl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.view.backgroundColor = .red
-        
+                
 //        self.view.addSubview(self.titleLabel)
 //        self.titleLabel.anchor(top: self.view.safeTopAnchor, paddingTop: 32, centerX: self.view.centerXAnchor)
         

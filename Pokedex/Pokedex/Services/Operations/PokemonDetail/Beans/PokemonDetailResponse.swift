@@ -11,8 +11,15 @@ struct PokemonDetailResponse: Decodable {
     let pokemonId: Int?
     let name: String?
     
+    let sprites: PokemonSprite?
+    let moves: [PokemonMove]?
+    let stats: [PokemonStat]?
+    
     enum CodingKeys: String, CodingKey {
-        case pokemonId = "id"
-        case name
+        case pokemonId = "id",
+             name,
+             sprites,
+             moves,
+             stats
     }
 }
