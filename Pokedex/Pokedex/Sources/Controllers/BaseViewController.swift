@@ -35,6 +35,7 @@ class BaseViewController<C>: UIViewController, Coordinable {
     override open func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = ColorLayout.bkColor
     }
     
 //    override func viewWillAppear(_ animated: Bool) {

@@ -11,6 +11,6 @@ import UIKit
 protocol PokemonListViewControllerDelegate: AnyObject {
     
     func viewDidLoaded()
-    func goToDetail(withId id: Int)
+    func showPokemonDetail(withId pokemonId: String)
     func fetchImage(from url: URL, completion: @escaping (UIImage?) -> Void)
 }

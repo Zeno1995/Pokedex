@@ -16,13 +16,6 @@ final class PokemonListViewController: BaseViewController<PokemonListViewControl
         return label
     }()
     
-    lazy var button: UIButton = {
-        let button = UIButton()
-        button.setTitle("Go to detail page", for: .normal)
-        button.addTarget(self, action: #selector(goToDetail(_:)), for: .touchUpInside)
-        return button
-    }()
-    
     private lazy var pokemonCollectionViewLayout: UICollectionViewLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 10
@@ -48,14 +41,9 @@ final class PokemonListViewController: BaseViewController<PokemonListViewControl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.view.backgroundColor = .red
-        
+                
 //        self.view.addSubview(self.titleLabel)
 //        self.titleLabel.anchor(top: self.view.safeTopAnchor, paddingTop: 32, centerX: self.view.centerXAnchor)
-//        
-//        self.view.addSubview(self.button)
-//        self.button.anchor(top: self.titleLabel.topAnchor, paddingTop: 32, centerX: self.view.centerXAnchor)
         
         self.view.addSubview(self.pokemonCollectionView)
         self.pokemonCollectionView.anchor(top: self.view.safeTopAnchor,
@@ -70,10 +58,6 @@ final class PokemonListViewController: BaseViewController<PokemonListViewControl
         guard let image = newImage else { return }
         pokemonList[indexPath.item].image = image
         pokemonCollectionView.reloadItems(at: [indexPath])
-    }
-    
-    @IBAction func goToDetail(_ sender: UIButton) {
-        self.coordinator.goToDetail(withId: 0)
     }
 }
 
@@ -110,5 +94,14 @@ extension PokemonListViewController: UICollectionViewDataSource, UICollectionVie
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let pokemonItem = pokemonList[indexPath.item]
+        if let urlString = pokemonItem.url,
+           let url = URL(string: urlString) {
+            let pokemonId = url.lastPathComponent
+            self.coordinator.showPokemonDetail(withId: pokemonId)
+        }
+        
+    }
     
 }

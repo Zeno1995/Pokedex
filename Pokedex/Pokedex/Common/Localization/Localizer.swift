@@ -16,4 +16,8 @@ extension Localizable {
 }
 
 enum Localizer {
+    enum PokemonDetail: String, Localizable {
+        case abilities
+        case moveTitle
+    }
 }
