@@ -86,3 +86,27 @@ extension UIView {
         return self.bottomAnchor
     }
 }
+
+extension UIView {
+    func removeAllConstraints() {
+        var mainSuperview = self.superview
+
+        while let superview = mainSuperview {
+            for constraint in superview.constraints {
+
+                if let first = constraint.firstItem as? UIView, first == self {
+                    superview.removeConstraint(constraint)
+                }
+
+                if let second = constraint.secondItem as? UIView, second == self {
+                    superview.removeConstraint(constraint)
+                }
+            }
+
+            mainSuperview = superview.superview
+        }
+
+        self.removeConstraints(self.constraints)
+        self.translatesAutoresizingMaskIntoConstraints = true
+    }
+}

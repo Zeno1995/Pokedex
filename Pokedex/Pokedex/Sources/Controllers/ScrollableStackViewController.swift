@@ -69,4 +69,10 @@ class ScrollableStackViewController<C>: BaseViewController<C> {
     func loadStackView() {
 
     }
+    
+    func addSeparatorView() {
+        let separatorView = SeparatorView()
+        separatorView.load()
+        self.containerStackView.addArrangedSubview(separatorView)
+    }
 }
