@@ -27,4 +27,41 @@ struct PokemonSprite: Decodable {
              frontShiny = "front_shiny",
              frontShinyFemale = "front_shiny_female"
     }
+    
+    func imagesUlr() -> [String] {
+        var imagesUrl = [String]()
+        if let url = backDefault {
+            imagesUrl.append(url)
+        }
+        
+        if let url = backFemaile {
+            imagesUrl.append(url)
+        }
+        
+        if let url = backShiny {
+            imagesUrl.append(url)
+        }
+        
+        if let url = backShinyFemale {
+            imagesUrl.append(url)
+        }
+        
+        if let url = frontDefault {
+            imagesUrl.append(url)
+        }
+        
+        if let url = frontFemale {
+            imagesUrl.append(url)
+        }
+        
+        if let url = frontShiny {
+            imagesUrl.append(url)
+        }
+        
+        if let url = frontShinyFemale {
+            imagesUrl.append(url)
+        }
+        
+        return imagesUrl
+    }
 }

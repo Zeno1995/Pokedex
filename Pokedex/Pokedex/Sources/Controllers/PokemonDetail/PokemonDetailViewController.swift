@@ -6,14 +6,42 @@
 //
 
 import Foundation
+import UIKit
 
 final class PokemonDetailViewController: ScrollableStackViewController<PokemonDetailViewControllerDelegate> {
     
+    let pokemonImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.anchor(height: 150)
+        return imageView
+    }()
+    
+    lazy var imagesCollectionView: ImagesCollectionView = {
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+
+        let collection = ImagesCollectionView(frame: CGRect.zero,
+                                              collectionViewLayout: layout,
+                                              itemSize: 40) { [weak self] selectedImage in
+            guard let self = self else { return }
+            self.pokemonImageView.image = selectedImage
+        }
+        collection.anchor(height: 40)
+        return collection
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.coordinator.viewDidLoaded()
+    }
+    
+    override func loadStackView() {
+        super.loadStackView()
+        
+        self.containerStackView.addArrangedSubview(pokemonImageView)
+        self.containerStackView.addArrangedSubview(imagesCollectionView)
     }
     
     func loadDetailResponse(_ response: PokemonDetailResponse) {
@@ -23,6 +51,16 @@ final class PokemonDetailViewController: ScrollableStackViewController<PokemonDe
                 statView.load(withStatName: (stat.stat?.name).stringOrEmpty, andValue: stat.baseStat ?? 0)
                 self.containerStackView.addArrangedSubview(statView)
             }
+        }
+        
+        self.title = response.name
+        
+        if let imagesUlr = response.sprites?.imagesUlr(), !imagesUlr.isEmpty {
+            self.imagesCollectionView.urlImages = imagesUlr
+            self.pokemonImageView.loadImageFrom(url: imagesUlr[0], inContext: nil)
+        } else {
+            self.pokemonImageView.isHidden = true
+            self.pokemonImageView.isHidden = true
         }
     }
 }
