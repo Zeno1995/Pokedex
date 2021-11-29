@@ -20,6 +20,7 @@ final class PokemonListViewController: BaseViewController<PokemonListViewControl
         let layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 10
         layout.minimumLineSpacing = 10
+        layout.itemSize = CGSize(width: 100, height: 100)
         return layout
     }()
     
@@ -41,17 +42,18 @@ final class PokemonListViewController: BaseViewController<PokemonListViewControl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
-//        self.view.addSubview(self.titleLabel)
-//        self.titleLabel.anchor(top: self.view.safeTopAnchor, paddingTop: 32, centerX: self.view.centerXAnchor)
         
         self.view.addSubview(self.pokemonCollectionView)
         self.pokemonCollectionView.anchor(top: self.view.safeTopAnchor,
                                           left: self.view.leadingAnchor,
                                           bottom: self.view.safeBottomAnchor,
-                                          right: self.view.trailingAnchor)
+                                          right: self.view.trailingAnchor,
+                                          paddingLeft: 20,
+                                          paddingRight: 20)
         
         self.coordinator.viewDidLoaded()
+        
+        self.title = Localizer.Common.title.localized
     }
     
     private func updateItemImage(at indexPath: IndexPath, newImage: UIImage?) {
@@ -104,4 +106,9 @@ extension PokemonListViewController: UICollectionViewDataSource, UICollectionVie
         
     }
     
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+         if (indexPath.row == pokemonList.count - 1 ) {
+             self.coordinator.loadOtherPokemon(offset: self.pokemonList.count)
+         }
+    }
 }

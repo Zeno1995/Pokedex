@@ -41,6 +41,6 @@ final class PokemonListOperation: StandardOperation<PokemonListRequest, PokemonL
     }
 
     private func key() -> String? {
-        endPoint
+        "\(endPoint)?limit=\(self.input.limit ?? 0)&\(self.input.offset ?? 0)"
     }
 }

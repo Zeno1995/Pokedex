@@ -13,4 +13,5 @@ protocol PokemonListViewControllerDelegate: AnyObject {
     func viewDidLoaded()
     func showPokemonDetail(withId pokemonId: String)
     func fetchImage(from url: URL, completion: @escaping (UIImage?) -> Void)
+    func loadOtherPokemon(offset: Int)
 }

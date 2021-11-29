@@ -9,9 +9,9 @@ import Foundation
 import UIKit
 
 final class PokemonListCoordinator: VoidCoordinator<PokemonListViewController> {
-    private func loadPokemonList() {
+    private func loadPokemonList(offset: Int = 0) {
         self.context.messenger.loader.showLoading()
-        let input = PokemonListRequest(offset: 0, limit: 100)
+        let input = PokemonListRequest(offset: offset, limit: 100)
         self.context.core.pokeServices.pokemonList(from: input,
                                                    stubFlag: false) { [weak self] result in
             guard let self = self else { return }
@@ -20,7 +20,7 @@ final class PokemonListCoordinator: VoidCoordinator<PokemonListViewController> {
                 switch result {
                 case .success(let response):
                     guard let results = response.results else { return }
-                    self.view.pokemonList = results.map({ PokemonListImageItem(item: $0) })
+                    results.forEach({ self.view.pokemonList.append(PokemonListImageItem(item: $0))})
                 case .failure(let error):
                     self.context.messenger.alert.showAlert(title: "Errore!", description: error.localizedDescription)
                 }
@@ -53,6 +53,10 @@ extension PokemonListCoordinator: PokemonListViewControllerDelegate {
                 }
             }
         }
+    }
+    
+    func loadOtherPokemon(offset: Int) {
+        self.loadPokemonList(offset: offset)
     }
     
 }

@@ -8,6 +8,13 @@
 import UIKit
 
 class PokemonItemCollectionViewCell: UICollectionViewCell {
+    
+    private lazy var containerView: UIView = {
+        let view = UIView()
+        view.addShadow()
+        return view
+    }()
+    
     private lazy var imageView: UIImageView = {
         let iView = UIImageView(image: .imageFrom(name: "Placeholder"))
         iView.contentMode = .scaleAspectFit
@@ -18,13 +25,15 @@ class PokemonItemCollectionViewCell: UICollectionViewCell {
     }()
 
     private lazy var label: PaddingLabel = {
-        let label = PaddingLabel(topInset: 10,
-                                 bottomInset: 10,
-                                 leftInset: 10,
-                                 rightInset: 10)
+        let label = PaddingLabel(topInset: 2,
+                                 bottomInset: 2,
+                                 leftInset: 6,
+                                 rightInset: 6)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.layer.masksToBounds = true
         label.layer.cornerRadius = 10
+        label.backgroundColor = ColorLayout.primary
+        label.numberOfLines = 0
         return label
     }()
 
@@ -50,53 +59,45 @@ class PokemonItemCollectionViewCell: UICollectionViewCell {
     }
 
     private func setupView() {
-        addSubview(imageView)
-        addSubview(label)
-
-        self.imageView.anchor(top: self.topAnchor,
+        self.addSubview(self.containerView)
+        self.containerView.anchor(top: self.topAnchor,
                               left: self.leadingAnchor,
                               bottom: self.bottomAnchor,
                               right: self.trailingAnchor)
         
-        self.label.anchor(bottom: self.imageView.bottomAnchor,
-                          centerX: self.imageView.centerXAnchor)
-//        NSLayoutConstraint.activate([
-//            imageView.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor),
-//            imageView.topAnchor.constraint(equalTo: topAnchor),
-//            imageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-//            imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
-//            imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-//
-//            label.leadingAnchor.constraint(greaterThanOrEqualTo: imageView.leadingAnchor),
-//            label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
-//            label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0)
-//        ])
+        self.containerView.addSubview(imageView)
+        self.containerView.addSubview(label)
+
+        self.imageView.anchor(top: self.containerView.topAnchor,
+                              left: self.containerView.leadingAnchor,
+                              bottom: self.containerView.bottomAnchor,
+                              right: self.containerView.trailingAnchor)
+        
+        self.label.anchor(bottom: self.containerView.bottomAnchor,
+                          width: 80,
+                          centerX: self.containerView.centerXAnchor)
+        
+        self.label.widthAnchor.constraint(equalToConstant: 88).isActive = true
+        
+        self.containerView.layer.borderColor = ColorLayout.primary.cgColor
+        self.containerView.layer.borderWidth = 1
+        self.containerView.layer.cornerRadius = 16
+        self.imageView.layer.cornerRadius = 16
     }
 
     private func updateViewWithState() {
         self.label.isHidden = false
         if let image = state?.image ?? .imageFrom(name: "Placeholder") {
             imageView.image = image
-//            let ratio = image.size.width / image.size.height
-//            setAspectRatioConstraint(toRatio: ratio)
         } else {
             imageView.image = nil
         }
 
         TextLayout.description
             .change(backgroundColor: ColorLayout.primary)
+            .change(textAlignment: .center)
             .apply(to: label, text: state?.name)
     }
-
-//    private func setAspectRatioConstraint(toRatio ratio: CGFloat) {
-//        imageViewAspectRatioConstraint?.isActive = false
-//
-//        imageViewAspectRatioConstraint = imageView.widthAnchor
-//            .constraint(equalTo: imageView.heightAnchor, multiplier: ratio)
-//        imageViewAspectRatioConstraint?.priority = .init(999)
-//
-//        imageViewAspectRatioConstraint?.isActive = true
-//    }
 }
 
 extension PokemonItemCollectionViewCell {

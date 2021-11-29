@@ -109,4 +109,13 @@ extension UIView {
         self.removeConstraints(self.constraints)
         self.translatesAutoresizingMaskIntoConstraints = true
     }
+    
+    func addShadow(cornerRadius: CGFloat = 8) {
+        layer.shadowOpacity = 0.4
+        layer.shadowRadius = 8
+        layer.cornerRadius = cornerRadius
+        layer.shadowOffset = CGSize(width: 0, height: 0.5)
+        layer.shadowColor = ColorLayout.gray.cgColor
+        layer.masksToBounds = false
+    }
 }
