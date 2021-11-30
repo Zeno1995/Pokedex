@@ -34,7 +34,6 @@ final class PokemonDetailViewController: ScrollableStackViewController<PokemonDe
     lazy var abilitiesTitleLabel: UILabel = {
         let label = UILabel()
         TextLayout.title
-            .change(textAlignment: .left)
             .apply(to: label, text: Localizer.PokemonDetail.abilities.localized)
         return label
     }()
@@ -42,10 +41,26 @@ final class PokemonDetailViewController: ScrollableStackViewController<PokemonDe
     lazy var movesTitleLabel: UILabel = {
         let label = UILabel()
         TextLayout.title
-            .change(textAlignment: .left)
             .apply(to: label, text: Localizer.PokemonDetail.moveTitle.localized)
         return label
     }()
+    
+    let cellReuseIdentifier = "moveListCell"
+    lazy var moveTableView: IntrinsicTableView = {
+       let tableView = IntrinsicTableView()
+        tableView.isScrollEnabled = false
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = .none
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        return tableView
+    }()
+    
+    var movesList = [PokemonMove]() {
+        didSet {
+            self.moveTableView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,12 +103,30 @@ final class PokemonDetailViewController: ScrollableStackViewController<PokemonDe
         
         if let moves = response.moves, !moves.isEmpty {
             self.containerStackView.addArrangedSubview(self.movesTitleLabel)
-            for move in moves {
-                guard let move = move.move else { continue }
-                let moveLabel = UILabel()
-                TextLayout.description.change(textAlignment: .left).apply(to: moveLabel, text: move.name)
-                self.containerStackView.addArrangedSubview(moveLabel)
-            }
+            self.containerStackView.addArrangedSubview(self.moveTableView)
+            self.movesList = moves
+        }
+    }
+}
+
+extension PokemonDetailViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        self.movesList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) {
+            cell.textLabel?.text = self.movesList[indexPath.row].move?.name.stringOrEmpty
+            return cell
+        }
+        return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let item = self.movesList[indexPath.row]
+        if let move = item.move, let url = URL(string: move.url.stringOrEmpty) {
+            self.coordinator.showMoveDetail(withId: url.lastPathComponent)
         }
     }
 }

@@ -25,4 +25,8 @@ enum Localizer {
         case abilities
         case moveTitle
     }
+    
+    enum MoveDetail: String, Localizable {
+        case pokemonTitle
+    }
 }

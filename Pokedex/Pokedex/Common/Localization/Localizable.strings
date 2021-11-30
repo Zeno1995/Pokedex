@@ -1,5 +1,7 @@
 
 "poke.common.title"                                         = "Pokedex";
 
-"poke.pokemondetail.abilities"                              = "Abilità";
-"poke.pokemondetail.moveTitle"                              = "Mosse";
+"poke.pokemondetail.abilities"                              = "Abilities";
+"poke.pokemondetail.moveTitle"                              = "moves";
+
+"poke.movedetail.pokemonTitle"                              = "Learned by pokemon";

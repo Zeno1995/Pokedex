@@ -9,4 +9,5 @@ import Foundation
 
 protocol PokemonDetailViewControllerDelegate: AnyObject {
     func viewDidLoaded()
+    func showMoveDetail(withId moveId: String)
 }
