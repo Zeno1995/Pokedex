@@ -30,4 +30,10 @@ extension PokemonDetailCoordinator: PokemonDetailViewControllerDelegate {
     func viewDidLoaded() {
         self.getPokemonDetail()
     }
+    
+    func showMoveDetail(withId moveId: String) {
+        let param = MoveDetailParam(moveId: moveId)
+        let coordinator = MoveDetailCoordinator(context: self.context, param: param)
+        self.context.navigator.navigate(to: coordinator, animated: true)
+    }
 }

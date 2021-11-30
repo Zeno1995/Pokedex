@@ -21,6 +21,12 @@ final class PokeServiceCore: BaseService, PokeService {
         execute(PokemonDetailOperation(input: input, container: container, useStub: stubFlag), completion: completion)
     }
     
+    func moveDetail(from input: MoveDetailRequest,
+                     stubFlag: Bool?,
+                     completion: @escaping Completion<MoveDetailResponse, ServiceError>) -> Operation {
+        execute(MoveDetailOperation(input: input, container: container, useStub: stubFlag), completion: completion)
+    }
+    
     func downloadImage(input: String, completion: @escaping Completion<UIImage?, ServiceError>) -> Operation {
         execute(ImageOperation(input: input, container: container, useStub: nil), completion: completion)
     }

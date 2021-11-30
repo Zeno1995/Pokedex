@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E506F2D327550A00007D1326 /* MoveDetailOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E506F2D227550A00007D1326 /* MoveDetailOperation.swift */; };
+		E506F2D627550A4C007D1326 /* MoveDetailRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E506F2D527550A4C007D1326 /* MoveDetailRequest.swift */; };
+		E506F2D827550A56007D1326 /* MoveDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E506F2D727550A56007D1326 /* MoveDetailResponse.swift */; };
+		E506F2DA27550ACF007D1326 /* MoveLearn.swift in Sources */ = {isa = PBXBuildFile; fileRef = E506F2D927550ACF007D1326 /* MoveLearn.swift */; };
+		E506F2DC27550BC1007D1326 /* MoveEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = E506F2DB27550BC1007D1326 /* MoveEffect.swift */; };
+		E506F2DF27550DEC007D1326 /* MoveDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E506F2DE27550DEC007D1326 /* MoveDetailViewController.swift */; };
+		E506F2E127550DF6007D1326 /* MoveDetailViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E506F2E027550DF6007D1326 /* MoveDetailViewControllerDelegate.swift */; };
+		E506F2E327550E02007D1326 /* MoveDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E506F2E227550E02007D1326 /* MoveDetailCoordinator.swift */; };
+		E506F2E527550E4A007D1326 /* MoveDetailParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = E506F2E427550E4A007D1326 /* MoveDetailParam.swift */; };
+		E506F2E727551C59007D1326 /* IntrinsicTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E506F2E627551C59007D1326 /* IntrinsicTableView.swift */; };
 		E50B41982750E2CC000EFCAB /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50B41972750E2CC000EFCAB /* ImageCache.swift */; };
 		E50B419A2750E3EF000EFCAB /* CacheError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50B41992750E3EF000EFCAB /* CacheError.swift */; };
 		E50B419D2750E4C4000EFCAB /* ImageDownloadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50B419C2750E4C4000EFCAB /* ImageDownloadOperation.swift */; };
@@ -120,6 +130,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E506F2D227550A00007D1326 /* MoveDetailOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveDetailOperation.swift; sourceTree = "<group>"; };
+		E506F2D527550A4C007D1326 /* MoveDetailRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveDetailRequest.swift; sourceTree = "<group>"; };
+		E506F2D727550A56007D1326 /* MoveDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveDetailResponse.swift; sourceTree = "<group>"; };
+		E506F2D927550ACF007D1326 /* MoveLearn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveLearn.swift; sourceTree = "<group>"; };
+		E506F2DB27550BC1007D1326 /* MoveEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveEffect.swift; sourceTree = "<group>"; };
+		E506F2DE27550DEC007D1326 /* MoveDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveDetailViewController.swift; sourceTree = "<group>"; };
+		E506F2E027550DF6007D1326 /* MoveDetailViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveDetailViewControllerDelegate.swift; sourceTree = "<group>"; };
+		E506F2E227550E02007D1326 /* MoveDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveDetailCoordinator.swift; sourceTree = "<group>"; };
+		E506F2E427550E4A007D1326 /* MoveDetailParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveDetailParam.swift; sourceTree = "<group>"; };
+		E506F2E627551C59007D1326 /* IntrinsicTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntrinsicTableView.swift; sourceTree = "<group>"; };
 		E50B41972750E2CC000EFCAB /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		E50B41992750E3EF000EFCAB /* CacheError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheError.swift; sourceTree = "<group>"; };
 		E50B419C2750E4C4000EFCAB /* ImageDownloadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloadOperation.swift; sourceTree = "<group>"; };
@@ -244,6 +264,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E506F2D1275509EB007D1326 /* MoveDetail */ = {
+			isa = PBXGroup;
+			children = (
+				E506F2D427550A40007D1326 /* Beans */,
+				E506F2D227550A00007D1326 /* MoveDetailOperation.swift */,
+			);
+			path = MoveDetail;
+			sourceTree = "<group>";
+		};
+		E506F2D427550A40007D1326 /* Beans */ = {
+			isa = PBXGroup;
+			children = (
+				E506F2D527550A4C007D1326 /* MoveDetailRequest.swift */,
+				E506F2D727550A56007D1326 /* MoveDetailResponse.swift */,
+				E506F2D927550ACF007D1326 /* MoveLearn.swift */,
+				E506F2DB27550BC1007D1326 /* MoveEffect.swift */,
+			);
+			path = Beans;
+			sourceTree = "<group>";
+		};
+		E506F2DD27550DDB007D1326 /* MoveDetail */ = {
+			isa = PBXGroup;
+			children = (
+				E506F2E227550E02007D1326 /* MoveDetailCoordinator.swift */,
+				E506F2DE27550DEC007D1326 /* MoveDetailViewController.swift */,
+				E506F2E027550DF6007D1326 /* MoveDetailViewControllerDelegate.swift */,
+				E506F2E427550E4A007D1326 /* MoveDetailParam.swift */,
+			);
+			path = MoveDetail;
+			sourceTree = "<group>";
+		};
 		E50B419B2750E495000EFCAB /* ImageDownload */ = {
 			isa = PBXGroup;
 			children = (
@@ -361,6 +412,7 @@
 		E5A3E1032750C1AA004C0125 /* Operations */ = {
 			isa = PBXGroup;
 			children = (
+				E506F2D1275509EB007D1326 /* MoveDetail */,
 				E5BF36A1275122DB00F93D7C /* PokemonDetail */,
 				E50B419B2750E495000EFCAB /* ImageDownload */,
 				E5A3E1042750C1B7004C0125 /* PokemonList */,
@@ -420,6 +472,7 @@
 				E5A6E0D52752EA4D00D74BF6 /* StatView.swift */,
 				E5A6E0DC2752FC0D00D74BF6 /* ImagesCollectionView.swift */,
 				E5BB9661275431C70064C391 /* SeparatorView.swift */,
+				E506F2E627551C59007D1326 /* IntrinsicTableView.swift */,
 			);
 			path = CustomComponents;
 			sourceTree = "<group>";
@@ -681,6 +734,7 @@
 		E5E7DA18274FD68C00606A7F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				E506F2DD27550DDB007D1326 /* MoveDetail */,
 				E5A3E0E92750383E004C0125 /* PokemonDetail */,
 				E5E7DA1B274FD7E800606A7F /* PokemonList */,
 				E5E7DA19274FD6A300606A7F /* BaseViewController.swift */,
@@ -841,6 +895,8 @@
 				E5E09437274EA49E00694309 /* TextLayout.swift in Sources */,
 				E5E094C0274EA4AE00694309 /* String.swift in Sources */,
 				E5E09436274EA49E00694309 /* TextViewLayout.swift in Sources */,
+				E506F2E527550E4A007D1326 /* MoveDetailParam.swift in Sources */,
+				E506F2DC27550BC1007D1326 /* MoveEffect.swift in Sources */,
 				E5E09435274EA49E00694309 /* ButtonLayout.swift in Sources */,
 				E5E093CA274EA34500694309 /* Statistics.swift in Sources */,
 				E5A6E0CC275146BC00D74BF6 /* PokemonSprite.swift in Sources */,
@@ -862,29 +918,36 @@
 				E5E094CA274EA4AE00694309 /* SessionService.swift in Sources */,
 				E5E093CE274EA34500694309 /* ServiceError.swift in Sources */,
 				E5A3E1022750C17B004C0125 /* PokeServiceCore.swift in Sources */,
+				E506F2E327550E02007D1326 /* MoveDetailCoordinator.swift in Sources */,
 				E5E094BC274EA4AE00694309 /* UIView.swift in Sources */,
 				E5E093C2274EA34500694309 /* MappingOperation.swift in Sources */,
 				E5E093C8274EA34500694309 /* Result.swift in Sources */,
 				E5E093C0274EA34500694309 /* StatusCodeOperation.swift in Sources */,
 				E5A6E0D62752EA4D00D74BF6 /* StatView.swift in Sources */,
 				E5E094C6274EA4AE00694309 /* Optional.swift in Sources */,
+				E506F2E727551C59007D1326 /* IntrinsicTableView.swift in Sources */,
 				E5E09439274EA49E00694309 /* VoidCoordiantor.swift in Sources */,
 				E5A3E0F1275038AF004C0125 /* PokemonDetailParam.swift in Sources */,
 				E5A6E0D22752E95A00D74BF6 /* ScrollableStackViewController.swift in Sources */,
+				E506F2DF27550DEC007D1326 /* MoveDetailViewController.swift in Sources */,
 				E5E094C9274EA4AE00694309 /* SessionServiceCore.swift in Sources */,
 				E5BF36A6275122FE00F93D7C /* PokemonDetailRequest.swift in Sources */,
 				E5E094C1274EA4AE00694309 /* UIButton.swift in Sources */,
 				E5A6E0D02752E4F100D74BF6 /* PokemonStat.swift in Sources */,
 				E5E09464274EA49E00694309 /* StandardMessenger.swift in Sources */,
 				E5E09463274EA49E00694309 /* Messenger.swift in Sources */,
+				E506F2DA27550ACF007D1326 /* MoveLearn.swift in Sources */,
 				E5E09438274EA49E00694309 /* FontLayout.swift in Sources */,
 				E5A6E0CE2751483C00D74BF6 /* PokemonMove.swift in Sources */,
 				E5A3E1142750C6F5004C0125 /* UIImage.swift in Sources */,
+				E506F2D827550A56007D1326 /* MoveDetailResponse.swift in Sources */,
 				E5A3E1172750C7A6004C0125 /* PaddingLabel.swift in Sources */,
 				E5A3E1122750C6B9004C0125 /* PokemonItemCollectionViewCell.swift in Sources */,
 				E5E094CC274EA4AE00694309 /* Localizer.swift in Sources */,
+				E506F2E127550DF6007D1326 /* MoveDetailViewControllerDelegate.swift in Sources */,
 				E5A3E1002750C170004C0125 /* PokeService.swift in Sources */,
 				E5548618274E919B0015DB03 /* AppDelegate.swift in Sources */,
+				E506F2D327550A00007D1326 /* MoveDetailOperation.swift in Sources */,
 				E5E093C1274EA34500694309 /* NetworkOperation.swift in Sources */,
 				E5A3E0ED27503862004C0125 /* PokemonDetailViewController.swift in Sources */,
 				E5E093BD274EA34500694309 /* Network.swift in Sources */,
@@ -908,6 +971,7 @@
 				E5BB9662275431C70064C391 /* SeparatorView.swift in Sources */,
 				E5E093BB274EA34500694309 /* URLSessionOperation.swift in Sources */,
 				E50B419A2750E3EF000EFCAB /* CacheError.swift in Sources */,
+				E506F2D627550A4C007D1326 /* MoveDetailRequest.swift in Sources */,
 				E5E093CD274EA34500694309 /* BaseService.swift in Sources */,
 				E50B41982750E2CC000EFCAB /* ImageCache.swift in Sources */,
 				E5A3E0FB27503E04004C0125 /* UIViewController.swift in Sources */,
