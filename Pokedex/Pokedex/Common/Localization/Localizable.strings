@@ -2,6 +2,9 @@
 "poke.common.title"                                         = "Pokedex";
 
 "poke.pokemondetail.abilities"                              = "Abilities";
-"poke.pokemondetail.moveTitle"                              = "moves";
+"poke.pokemondetail.moveTitle"                              = "Moves";
 
 "poke.movedetail.pokemonTitle"                              = "Learned by pokemon";
+
+"poke.alert.error"                                          = "Error";
+"poke.alert.genericError"                                   = "A generic error has accourred"

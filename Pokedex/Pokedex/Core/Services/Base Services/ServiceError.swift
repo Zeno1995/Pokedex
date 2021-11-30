@@ -33,8 +33,14 @@ enum ServiceError: OperationError {
     }
     
     var localizedDescription: String {
-        //Localized description to show error
-        return String.empty
+        switch self {
+        case .generic(let error):
+            return error.localizedDescription
+        case .network(let error):
+            return error.localizedDescription
+        default:
+            return Localizer.Alert.genericError.localized
+        }
     }
 }
 

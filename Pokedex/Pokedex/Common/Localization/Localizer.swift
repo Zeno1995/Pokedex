@@ -29,4 +29,9 @@ enum Localizer {
     enum MoveDetail: String, Localizable {
         case pokemonTitle
     }
+    
+    enum Alert: String, Localizable {
+        case error
+        case genericError
+    }
 }

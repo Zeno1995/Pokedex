@@ -20,7 +20,8 @@ final class MoveDetailCoordinator: BaseCoordinator<MoveDetailViewController, Mov
                     self.view.loadMoves(response: response)
                 }
             case .failure(let error):
-                self.context.messenger.alert.showAlert(title: "Errore", description: error.localizedDescription)
+                self.context.messenger.alert.showAlert(title: Localizer.Alert.error.localized,
+                                                       description: error.localizedDescription)
             }
         }
     }

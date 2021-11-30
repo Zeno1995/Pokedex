@@ -22,7 +22,7 @@ final class PokemonListCoordinator: VoidCoordinator<PokemonListViewController> {
                     guard let results = response.results else { return }
                     results.forEach({ self.view.pokemonList.append(PokemonListImageItem(item: $0))})
                 case .failure(let error):
-                    self.context.messenger.alert.showAlert(title: "Errore!", description: error.localizedDescription)
+                    self.context.messenger.alert.showAlert(title: Localizer.Alert.error.localized, description: error.localizedDescription)
                 }
             }
         }

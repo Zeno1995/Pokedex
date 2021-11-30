@@ -19,7 +19,8 @@ final class PokemonDetailCoordinator: BaseCoordinator<PokemonDetailViewControlle
                 case .success(let response):
                     self.view.loadDetailResponse(response)
                 case .failure(let error):
-                    self.context.messenger.alert.showAlert(title: "Errore", description: error.localizedDescription)
+                    self.context.messenger.alert.showAlert(title: Localizer.Alert.error.localized,
+                                                           description: error.localizedDescription)
                 }
             }
         }
