@@ -7,4 +7,4 @@
 "poke.movedetail.pokemonTitle"                              = "Learned by pokemon";
 
 "poke.alert.error"                                          = "Error";
-"poke.alert.genericError"                                   = "A generic error has accourred"
+"poke.alert.genericError"                                   = "A generic error has accourred";
